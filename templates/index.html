@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snip — URL Shortener</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <!-- Monospace display font from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ── Header ──────────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="logo">
+      <span class="logo-bracket">[</span>snip<span class="logo-bracket">]</span>
+    </div>
+    <p class="tagline">paste long. get short.</p>
+  </header>
+
+  <!-- ── Main card ────────────────────────────────────────────────────────── -->
+  <main class="main">
+    <section class="card" role="main">
+
+      <!-- Input area -->
+      <div class="input-group">
+        <label for="urlInput" class="input-label">Long URL</label>
+        <input
+          type="url"
+          id="urlInput"
+          class="url-input"
+          placeholder="https://example.com/some/very/long/path?with=params&and=more"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button id="shortenBtn" class="btn-shorten" onclick="shortenUrl()">
+          <span class="btn-text">Shorten</span>
+          <span class="btn-arrow">→</span>
+        </button>
+      </div>
+
+      <!-- Error message -->
+      <div id="errorBox" class="error-box" role="alert" aria-live="polite" hidden>
+        <span class="error-icon">✕</span>
+        <span id="errorText"></span>
+      </div>
+
+      <!-- Result area -->
+      <div id="resultBox" class="result-box" hidden>
+        <div class="result-header">
+          <span class="result-label">Your short URL</span>
+          <span id="alreadyExisted" class="badge-existed" hidden>already existed</span>
+        </div>
+        <div class="result-row">
+          <a id="shortLink" class="short-link" href="#" target="_blank" rel="noopener"></a>
+          <button class="btn-copy" onclick="copyToClipboard()" title="Copy to clipboard">
+            <span id="copyIcon">⎘</span>
+          </button>
+        </div>
+        <div class="result-meta">
+          <span class="meta-label">code</span>
+          <code id="shortCode" class="meta-code"></code>
+          <span class="meta-sep">·</span>
+          <span class="meta-label">created</span>
+          <span id="createdAt" class="meta-value"></span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Recent history -->
+    <section class="history-section" id="historySection" hidden>
+      <h2 class="history-title">This session</h2>
+      <ul class="history-list" id="historyList"></ul>
+    </section>
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <span>built with Flask + SQLite</span>
+    <span class="footer-sep">·</span>
+    <a href="https://github.com" target="_blank" rel="noopener">source</a>
+  </footer>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
